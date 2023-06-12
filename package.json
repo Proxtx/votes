@@ -1,0 +1,24 @@
+{
+  "name": "votes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Proxtx/votes.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Proxtx/votes/issues"
+  },
+  "homepage": "https://github.com/Proxtx/votes#readme",
+  "dependencies": {
+    "@proxtx/config": "^1.0.2",
+    "@proxtx/framework": "^1.5.8"
+  }
+}
