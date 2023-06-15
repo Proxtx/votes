@@ -3,7 +3,7 @@ import config from "@proxtx/config";
 
 let result = await listen(config.port);
 let combineHandler = await result.combineHandler(result.server);
-combineHandler.onCombine("voteResults", () => {
+combineHandler.onCombine("voteResults", (module) => {
   try {
     global.voteHandler(module);
   } catch {

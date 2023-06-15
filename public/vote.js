@@ -1,7 +1,7 @@
 let callbacks = [];
 
 let results = [0, 0];
-export const id = 0;
+export let id = 0;
 
 export const castVote = async (v, cId) => {
   if (id != cId) return;
@@ -19,11 +19,11 @@ const runCombineFunc = async (method, value) => {
 };
 
 const calcResult = () => {
-  let total;
+  let total = 0;
   for (let r of results) total += r;
   let ret = [];
   for (let r of results) {
-    ret.push(Math.round(r / total));
+    ret.push(r / total);
   }
   return ret;
 };

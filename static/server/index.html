@@ -5,8 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Server</title>
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <img src="logo.png" />
+    <img src="logo.png" id="logo" />
+    <div id="voting">
+      <div id="questionText">
+        <a>Wurde </a><q id="quote"></q><a> gesagt?</a>
+      </div>
+      <div id="votes">
+        <div id="yes" class="vote">
+          <a>Ja</a>
+          <div class="graphWrap">
+            <div id="yesGraph" class="graph"></div>
+          </div>
+        </div>
+        <div id="no" class="vote">
+          <a>Nein</a>
+          <div class="graphWrap">
+            <div id="noGraph" class="graph"></div>
+          </div>
+        </div>
+        <div id="time" class="vote">
+          <a>Zeit</a>
+          <div class="graphWrap">
+            <div id="timeGraph" class="graph"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js" type="module"></script>
   </body>
 </html>
