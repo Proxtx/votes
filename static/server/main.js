@@ -58,14 +58,14 @@ const runScript = async () => {
     disabled = false;
     quote.innerText = entry.zitat;
     setOptionTexts(entry.options);
-    await startTimer(20000);
+    await startTimer(45000);
     disabled = true;
     await new Promise((r) => setTimeout(r, 2000));
     if (entry.result == 0) graph1.style.backgroundColor = "green";
     if (entry.result == 1) graph2.style.backgroundColor = "green";
     if (entry.result == 2) graph3.style.backgroundColor = "green";
     if (entry.result == 3) graph4.style.backgroundColor = "green";
-    await new Promise((r) => setTimeout(r, 3000));
+    await new Promise((r) => setTimeout(r, 10000));
   }
 };
 
