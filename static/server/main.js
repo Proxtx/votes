@@ -49,33 +49,7 @@ const startTimer = async (time) => {
   await res.finished;
 };
 
-let script = [
-  {
-    zitat: "test1",
-    options: ["1", "2", "3", "4"],
-    result: 2,
-  },
-  {
-    zitat: "test2",
-    options: ["a", "b", "c", "d"],
-    result: 0,
-  },
-  {
-    zitat: "test3",
-    options: ["1", "2", "3", "4"],
-    result: 3,
-  },
-  {
-    zitat: "test4",
-    options: ["a", "b", "c", "d"],
-    result: 1,
-  },
-  {
-    zitat: "test5",
-    options: ["1", "2", "3", "4"],
-    result: 2,
-  },
-];
+let script = await voteApi.script;
 
 const runScript = async () => {
   for (let entry of script) {

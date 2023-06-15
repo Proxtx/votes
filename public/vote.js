@@ -1,8 +1,11 @@
+import config from "@proxtx/config";
+
 let callbacks = [];
 
 let results = [];
 export let id = 0;
 export let options = ["Loading"];
+export const script = config.script;
 
 export const castVote = async (v, cId) => {
   if (id != cId) return;
