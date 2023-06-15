@@ -1,0 +1,12 @@
+#start {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #a83b3b;
+  border: 0;
+  padding: 50px;
+  color: white;
+  font-size: 200%;
+  font-family: Kroftsmann;
+}
