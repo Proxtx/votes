@@ -1,7 +1,8 @@
 let callbacks = [];
 
-let results = [0, 0];
+let results = [];
 export let id = 0;
+export let options = ["Loading"];
 
 export const castVote = async (v, cId) => {
   if (id != cId) return;
@@ -28,8 +29,12 @@ const calcResult = () => {
   return ret;
 };
 
-export const resetPoll = () => {
-  results = [0, 0];
+export const resetPoll = (pOptions) => {
+  results = [];
+  for (let t in pOptions) {
+    results.push(0);
+  }
+  options = pOptions;
   id = Math.floor(Math.random() * 1000);
 };
 

@@ -1,7 +1,13 @@
 import { connect } from "../wsConnectionHandler.js";
 
-const yesGraph = document.getElementById("yesGraph");
-const noGraph = document.getElementById("noGraph");
+const graph1 = document.getElementById("graph1");
+const graph2 = document.getElementById("graph2");
+const graph3 = document.getElementById("graph3");
+const graph4 = document.getElementById("graph4");
+const text1 = document.getElementById("text1");
+const text2 = document.getElementById("text2");
+const text3 = document.getElementById("text3");
+const text4 = document.getElementById("text4");
 const timeGraph = document.getElementById("timeGraph");
 const quote = document.getElementById("quote");
 
@@ -13,8 +19,10 @@ framework.ws.addModule(
   {
     voteUpdate(result) {
       if (disabled) return;
-      yesGraph.style.height = result[0] * 100 + "%";
-      noGraph.style.height = result[1] * 100 + "%";
+      graph1.style.height = result[0] * 100 + "%";
+      graph2.style.height = result[1] * 100 + "%";
+      graph3.style.height = result[2] * 100 + "%";
+      graph4.style.height = result[3] * 100 + "%";
     },
   },
   "voteResults"
@@ -44,46 +52,65 @@ const startTimer = async (time) => {
 let script = [
   {
     zitat: "test1",
-    result: true,
+    options: ["1", "2", "3", "4"],
+    result: 2,
   },
   {
     zitat: "test2",
-    result: false,
+    options: ["a", "b", "c", "d"],
+    result: 0,
   },
   {
     zitat: "test3",
-    result: true,
+    options: ["1", "2", "3", "4"],
+    result: 3,
   },
   {
     zitat: "test4",
-    result: false,
+    options: ["a", "b", "c", "d"],
+    result: 1,
   },
   {
     zitat: "test5",
-    result: true,
+    options: ["1", "2", "3", "4"],
+    result: 2,
   },
 ];
 
 const runScript = async () => {
   for (let entry of script) {
     resetVotes();
-    await voteApi.resetPoll();
+    await voteApi.resetPoll(entry.options);
     disabled = false;
     quote.innerText = entry.zitat;
+    setOptionTexts(entry.options);
     await startTimer(20000);
     disabled = true;
     await new Promise((r) => setTimeout(r, 2000));
-    if (entry.result) yesGraph.style.backgroundColor = "green";
-    else noGraph.style.backgroundColor = "green";
+    if (entry.result == 0) graph1.style.backgroundColor = "green";
+    if (entry.result == 1) graph2.style.backgroundColor = "green";
+    if (entry.result == 2) graph3.style.backgroundColor = "green";
+    if (entry.result == 3) graph4.style.backgroundColor = "green";
     await new Promise((r) => setTimeout(r, 3000));
   }
 };
 
+const setOptionTexts = (options) => {
+  text1.innerText = options[0];
+  text2.innerText = options[1];
+  text3.innerText = options[2];
+  text4.innerText = options[3];
+};
+
 const resetVotes = () => {
-  yesGraph.style.height = "0%";
-  yesGraph.style.backgroundColor = "#a83b3b";
-  noGraph.style.height = "0%";
-  noGraph.style.backgroundColor = "#a83b3b";
+  graph1.style.height = "0%";
+  graph1.style.backgroundColor = "#a83b3b";
+  graph2.style.height = "0%";
+  graph2.style.backgroundColor = "#a83b3b";
+  graph3.style.height = "0%";
+  graph3.style.backgroundColor = "#a83b3b";
+  graph4.style.height = "0%";
+  graph4.style.backgroundColor = "#a83b3b";
 };
 
 if (localStorage.getItem("pwd") == "ncg-abi23") runScript();

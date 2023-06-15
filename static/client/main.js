@@ -1,32 +1,45 @@
-const yes = document.getElementById("yes");
-const no = document.getElementById("no");
-
-yes.addEventListener("click", () => {
-  vote(true);
-});
-
-no.addEventListener("click", () => {
-  vote(false);
-});
+const votes = document.getElementById("votes");
 
 const voteApi = await framework.load("vote.js");
+
+const generateOptions = async () => {
+  votes.innerHTML = "";
+  let options = await voteApi.options;
+  for (let option in options) {
+    let text = document.createElement("h1");
+    text.innerText = options[option];
+    text.addEventListener("click", () => {
+      if (votedId == id) return;
+      vote(option);
+      chooseOption(text);
+    });
+
+    votes.appendChild(text);
+  }
+};
+
+const chooseOption = (o) => {
+  for (let childIndex = 0; childIndex < votes.children.length; childIndex++) {
+    let c = votes.children[childIndex];
+    if (c == o) continue;
+    greyOut(c);
+  }
+};
 
 let id = -1;
 let votedId = localStorage.getItem("votedId");
 
 const reset = () => {
-  yes.classList.remove("greyedOut");
-  no.classList.remove("greyedOut");
+  for (let childIndex = 0; childIndex < votes.children.length; childIndex++)
+    votes.children[childIndex].classList.remove("greyedOut");
 };
 
 const vote = async (v) => {
   if (votedId == id) return;
   votedId = id;
   localStorage.setItem("votedId", votedId);
-  if (v) greyOut(no);
-  else greyOut(yes);
 
-  await voteApi.castVote(Number(!v), id);
+  await voteApi.castVote(v, id);
 };
 
 const greyOut = (n) => {
@@ -38,6 +51,7 @@ const vLoop = async () => {
   if (nId != id) {
     reset();
     id = nId;
+    generateOptions();
   }
   await new Promise((r) => setTimeout(r, 3000));
   vLoop();
