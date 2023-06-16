@@ -87,4 +87,4 @@ const resetVotes = () => {
   graph4.style.backgroundColor = "#a83b3b";
 };
 
-if (localStorage.getItem("pwd") == "ncg-abi23") runScript();
+if (localStorage.getItem("pwd") == "ncg-abi23" || localStorage.getItem("pwd") == "null") runScript();
