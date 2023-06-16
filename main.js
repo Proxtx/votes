@@ -1,8 +1,14 @@
-import { listen } from "@proxtx/framework";
 import config from "@proxtx/config";
+import { setup } from "@proxtx/framework";
+import express from "express";
+import cors from "cors";
 
-let result = await listen(config.port);
-let combineHandler = await result.combineHandler(result.server);
+const app = express();
+app.use(cors());
+let result = await setup(app);
+let server = app.listen(config.port);
+
+let combineHandler = await result.combineHandler(server);
 combineHandler.onCombine("voteResults", (module) => {
   try {
     global.voteHandler(module);
